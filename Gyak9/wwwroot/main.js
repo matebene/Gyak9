@@ -8,9 +8,9 @@ var jóVálasz;
 var questionId = 4;
 
 function kérdésMegjelenítés(kérdés) {
-    if (!kérdés) return; //Ha undefined a kérdés objektum, nincs mit tenni
+    if (!kérdés) return; 
     console.log(kérdés);
-    document.getElementById("kérdés_szöveg").innerText = kérdés.questionText
+    document.getElementById("kérdés_szöveg").innerText = kérdés.question1
     document.getElementById("válasz1").innerText = kérdés.answer1
     document.getElementById("válasz2").innerText = kérdés.answer2
     document.getElementById("válasz3").innerText = kérdés.answer3
@@ -22,7 +22,7 @@ function kérdésMegjelenítés(kérdés) {
     else {
         document.getElementById("kép").classList.add("rejtett")
     }
-    //Jó és rossz kérdések jelölésének levétele
+
     document.getElementById("válasz1").classList.remove("jó", "rossz");
     document.getElementById("válasz2").classList.remove("jó", "rossz");
     document.getElementById("válasz3").classList.remove("jó", "rossz");
@@ -42,9 +42,10 @@ function kérdésBetöltés(id) {
                 console.error(`Hibás válasz: ${response.status}`)
             }
             else {
-                kérdésMegjelenítés(response.json())
+                return response.json()
             }
         })
+        .then(data => kérdésMegjelenítés(data));
 }
 function előre() {
     questionId++;
